@@ -47,6 +47,9 @@ public class CustomerImp implements CustomerService {
 
     @Override
     public void deleteCustomer(int id) {
+        Customer search = repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Customer not found with id: " + id));
 
+        repository.delete(search);
     }
 }
