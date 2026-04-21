@@ -30,11 +30,10 @@ public class OrderDetailController {
     @PostMapping
     public ResponseEntity<OrderDetail> createNewOrderDetail(@RequestBody OrderDetail orderDetail) {
         OrderDetail detail = service.createNewOrderDetail(orderDetail);
-
-        // Genera la URI siguiendo el estándar que usaste en RoleController
+        
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path("/api/order-details/{id}")
+                .path("/api/reportes/{id}")
                 .buildAndExpand(detail.getId())
                 .toUri();
 

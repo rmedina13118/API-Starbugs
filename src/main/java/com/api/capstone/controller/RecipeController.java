@@ -34,7 +34,7 @@ public class RecipeController {
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path("/api/roles/{id}")
+                .path("/api/recetas/{id}")
                 .buildAndExpand(Recipe.getId())
                 .toUri();
 
