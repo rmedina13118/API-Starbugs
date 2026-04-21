@@ -1,5 +1,7 @@
 package com.api.capstone.model.enums;
 
 public enum TableState {
-    Disponible
+    Disponible,
+    Ocupada,
+    Reservada
 }
