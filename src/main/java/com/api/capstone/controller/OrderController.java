@@ -2,6 +2,8 @@ package com.api.capstone.controller;
 
 import com.api.capstone.exception.NotFoundException;
 import com.api.capstone.model.Order;
+import com.api.capstone.model.Person;
+import com.api.capstone.model.enums.OrderState;
 import com.api.capstone.repository.OrderRepository;
 import com.api.capstone.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +54,8 @@ public class OrderController {
     }
 
     @PatchMapping("/{id}/estado")
-    public ResponseEntity<?> updateStatus(@PathVariable Integer id, @RequestBody Map<String, String> body) {
-        String nuevoEstado = body.get("estado");
+    public ResponseEntity<?> updateStatus(@PathVariable Integer id, @RequestBody OrderState body) {
+        OrderState nuevoEstado = body;
 
         Order search = orderRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Order not found with id: " + id));
@@ -61,6 +63,27 @@ public class OrderController {
         orderRepository.updateOrderStatus(search.getId(), nuevoEstado);
 
         return ResponseEntity.ok("Estado del pedido actualizado correctamente.");
+    }
+
+    @PatchMapping("/{id}/preparador")
+    public ResponseEntity<?> updatePreparador(@PathVariable Integer id, @RequestBody Person preparador) {
+        if (!orderRepository.existsById(id)) {
+            throw new NotFoundException("Order not found with id: " + id);
+        }
+
+        orderRepository.updateOrderPreparador(id, preparador);
+        return ResponseEntity.ok("Preparador asignado correctamente.");
+    }
+
+
+    @PatchMapping("/{id}/entregador")
+    public ResponseEntity<?> updateEntregador(@PathVariable Integer id, @RequestBody Person entregador) {
+        if (!orderRepository.existsById(id)) {
+            throw new NotFoundException("Order not found with id: " + id);
+        }
+
+        orderRepository.updateOrderEntregador(id, entregador);
+        return ResponseEntity.ok("Entregador asignado correctamente.");
     }
 
     @DeleteMapping("/{id}")
