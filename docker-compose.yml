@@ -1,0 +1,12 @@
+services:
+  capstone:
+    build: .
+    container_name: capstone
+    network_mode: host
+    environment:
+
+      SPRING_DATASOURCE_URL: jdbc:mysql://mainline.proxy.rlwy.net:19770/railway?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: iZItxucldcXOufdgDOSPMHjqYvzyVPoa
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+    restart: always
