@@ -56,7 +56,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(
-            name = "id_entregrador",
+            name = "id_entregador",
             referencedColumnName = "id_persona"
     )
     private Person entregadorId;
