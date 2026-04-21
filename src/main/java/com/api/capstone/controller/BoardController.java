@@ -18,7 +18,7 @@ public class BoardController {
 
     @GetMapping
     public ResponseEntity<List<Board>> getAllBoard() {
-        return ResponseEntity.ok(service.getAllRoles());
+        return ResponseEntity.ok(service.getAllBoards());
     }
 
     @GetMapping("/{id}")
