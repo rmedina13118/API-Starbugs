@@ -3,9 +3,11 @@ package com.api.capstone.service.imp;
 import com.api.capstone.exception.NotFoundException;
 import com.api.capstone.model.Customer;
 import com.api.capstone.model.Order;
+import com.api.capstone.model.Person;
 import com.api.capstone.model.State;
 import com.api.capstone.repository.CustomerRepository;
 import com.api.capstone.repository.OrderRepository;
+import com.api.capstone.repository.PersonRepository;
 import com.api.capstone.repository.StateRepository;
 import com.api.capstone.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class OrderImp implements OrderService {
     private CustomerRepository customerRepository;
     @Autowired
     private StateRepository stateRepository;
+    @Autowired
+    private PersonRepository personRepository;
 
     @Override
     public List<Order> getAllOrders() {
@@ -50,11 +54,18 @@ public class OrderImp implements OrderService {
         State state = stateRepository.findById(order.getState().getId())
                 .orElseThrow(() -> new NotFoundException("State not found with id: " + order.getState().getId()));
 
+        Person preparador = personRepository.findById(order.getPreparadorId().getId())
+                .orElseThrow(() -> new NotFoundException("State not found with id: " + order.getPreparadorId().getId()));
+
+        Person entregador = personRepository.findById(order.getEntregadorId().getId())
+                .orElseThrow(() -> new NotFoundException("State not found with id: " + order.getPreparadorId().getId()));
+
         search.setCustomer(customer);
         search.setState(state);
         search.setTotal(order.getTotal());
         search.setDeliveryAddress(order.getDeliveryAddress());
-        //search.setPersonId(order.getPersonId());
+        search.setPreparadorId(preparador);
+        search.setEntregadorId(preparador);
 
         return orderRepository.save(search);
     }
