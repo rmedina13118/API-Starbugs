@@ -54,7 +54,7 @@ public class OrderImp implements OrderService {
         search.setState(state);
         search.setTotal(order.getTotal());
         search.setDeliveryAddress(order.getDeliveryAddress());
-        search.setPersonId(order.getPersonId());
+        //search.setPersonId(order.getPersonId());
 
         return orderRepository.save(search);
     }

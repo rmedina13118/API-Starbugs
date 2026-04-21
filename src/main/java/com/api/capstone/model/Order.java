@@ -47,11 +47,19 @@ public class Order {
     @Column(name = "total")
     private BigDecimal total;
 
-    @Column(name = "id_preparador")
-    private Integer personId;
+    @ManyToOne
+    @JoinColumn(
+            name = "id_preparador",
+            referencedColumnName = "id_persona"
+    )
+    private Person preparadorId;
 
-    @Column(name = "id_entregador")
-    private Integer entregadorId;
+    @ManyToOne
+    @JoinColumn(
+            name = "id_entregrador",
+            referencedColumnName = "id_persona"
+    )
+    private Person entregadorId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "modalidad")
