@@ -22,7 +22,7 @@ public class RoleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Role> getCategoryById(@PathVariable int id) {
+    public ResponseEntity<Role> getRoleById(@PathVariable int id) {
         return ResponseEntity.ok(service.getRoleById(id));
     }
 
